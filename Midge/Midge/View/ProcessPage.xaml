@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Midge.View.ProcessPage"
+             xmlns:local="clr-namespace:Midge.ViewModel"
+             xmlns:converters="clr-namespace:Midge.Converters">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:ProcessViewModel x:Key="ProcessViewModel" x:Name="ProcessViewModel" />
+			<converters:BytesToStringConverter  x:Key="BytesToStringConverter" x:Name="BytesToStringConverter"/>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<ContentPage.Content>
+		<StackLayout>
+			<ListView ItemsSource="{Binding Source={StaticResource ProcessViewModel}, Path=Processes}" 
+			          SelectedItem="{Binding Source={StaticResource ProcessViewModel}, Path=SelectedProcess}" 
+			          SeparatorColor="White" HeightRequest="400">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<ViewCell.View>
+								<StackLayout Margin="15, 0, 0, 0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+									<Label Text="{Binding ProcessName}" FontSize="Medium" TextColor="White" />
+									<Label Text="{Binding WorkingSet, Converter={StaticResource BytesToStringConverter}}" 
+									       FontSize="Micro" TextColor="Gold" />
+								</StackLayout>
+							</ViewCell.View>
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+
+			<StackLayout Orientation="Horizontal" Margin="15" HorizontalOptions="CenterAndExpand">
+				<Button HorizontalOptions="Center" Command="{Binding Source={StaticResource ProcessViewModel}, Path=KillSelectedProcess}" Text="Kill" />
+				<Button HorizontalOptions="Center" Command="{Binding Source={StaticResource ProcessViewModel}, Path=RefreshProcessList}" Text="Refresh" />
+			</StackLayout>
+		</StackLayout>
+	</ContentPage.Content>
+</ContentPage>

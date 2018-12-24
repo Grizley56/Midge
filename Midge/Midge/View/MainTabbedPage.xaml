@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:volumerClient="clr-namespace:Midge.View"
+             x:Class="Midge.View.MainTabbedPage"
+             x:Name="TabPanel" BackgroundColor="#303030" BarTextColor="White">
+	<TabbedPage.Children>
+		<volumerClient:SoundPage Title="Sound" />
+		<volumerClient:ProcessPage Title="Processes" />
+		<volumerClient:SettingsPage Title="Settings" />
+	</TabbedPage.Children>
+</TabbedPage>
