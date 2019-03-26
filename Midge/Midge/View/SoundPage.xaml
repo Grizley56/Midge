@@ -3,51 +3,50 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Midge.View.SoundPage"
-						 xmlns:local2="clr-namespace:Midge.ViewModel">
+						 xmlns:local2="clr-namespace:Midge.ViewModel"
+             xmlns:controls="clr-namespace:Midge.MidgeControls">
 
 	<ContentPage.Resources>
 		<ResourceDictionary>
-			<local2:SoundViewModel x:Key="SoundViewModel" x:Name="SoundViewModel" />
-			<local2:ConnectionViewModel x:Key="ConnectionViewModel" x:Name="ConnectionViewModel" />
 
-			<Style x:Key="LabelFontStyle" TargetType="Label">
-				<Setter Property="TextColor" Value="White" />
-				<Setter Property="FontSize" Value="20" />
-				<Setter Property="FontFamily" Value="Consolas" />
-			</Style>
+
+			
 		</ResourceDictionary>
 	</ContentPage.Resources>
 
 	<ContentPage.Content>
-		<StackLayout BackgroundColor="#303030" Padding="25, 0, 25, 0">
+		<StackLayout Padding="25, 10, 25, 0">
+			<controls:MidgeFrame Elevation="30" CornerRadius="10">
+				<StackLayout>
+					<StackLayout>
+						<Label Text="SOUND MANAGER" HorizontalTextAlignment="Center" Style="{StaticResource MidgeLabelHStyle}" ></Label>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Margin="0, 15, 0, 0">
+						<Label Text="Volume: " FontFamily="{StaticResource Light}" ></Label>
 
-			<Label Text="{Binding  Source={StaticResource ConnectionViewModel}, Path=Connection.State, Mode=OneWay, StringFormat='Channel State: {0}' }" 
-			       HorizontalTextAlignment="Center" Style="{StaticResource LabelFontStyle}"
-			       Margin="0, 30, 0, 0" x:Name="StateLabel" />
+						<Slider Maximum="100" Minimum="0" 
+						        Value="{Binding Source={StaticResource SoundViewModel}, Path=Sound.Volume, Mode=TwoWay}" 
+						        HorizontalOptions="FillAndExpand"
+						        HeightRequest="35" MaximumTrackColor="#404040" MinimumTrackColor="#404040"
+						        x:Name="VolumeSlider" />
 
+						<Label Text="{Binding Source={StaticResource SoundViewModel}, Path=Sound.Volume, Mode=OneWay}" 
+						       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" 
+						       x:Name="VolumeLabel" />
 
-			<StackLayout Orientation="Horizontal" Margin="0, 15, 0, 0">
-				<Label Text="Volume: " Style="{StaticResource LabelFontStyle}"></Label>
+					</StackLayout>
+					<StackLayout Orientation="Horizontal" Margin="0, 15, 0, 0">
+						<Label Text="Mute: "  VerticalTextAlignment="Center" />
+						<Switch Margin="25, 0, 0, 0" 
+						        IsToggled="{Binding Source={StaticResource SoundViewModel}, Path=Sound.IsMuted}">
 
-				<Slider Maximum="100" Minimum="0" 
-				        Value="{Binding Source={StaticResource SoundViewModel}, Path=Sound.Volume, Mode=TwoWay}" 
-				        ThumbColor="White" HorizontalOptions="FillAndExpand"
-				        HeightRequest="35"
-				        x:Name="VolumeSlider" />
+						</Switch>
+					</StackLayout>
+				</StackLayout>
+				
+			</controls:MidgeFrame>
 
-				<Label Text="{Binding Source={StaticResource SoundViewModel}, Path=Sound.Volume, Mode=OneWay}" 
-				       VerticalTextAlignment="Center" HorizontalTextAlignment="Center" Style="{StaticResource LabelFontStyle}" 
-				       x:Name="VolumeLabel" />
-
-			</StackLayout>
 			
-
-			<StackLayout Orientation="Horizontal" Margin="0, 15, 0, 0">
-				<Label Text="Mute: " Style="{StaticResource LabelFontStyle} " VerticalTextAlignment="Center" />
-				<Switch Margin="25, 0, 0, 0" IsToggled="{Binding Source={StaticResource SoundViewModel}, Path=Sound.IsMuted}">
-
-				</Switch>
-			</StackLayout>
 
 		</StackLayout>
 	</ContentPage.Content>

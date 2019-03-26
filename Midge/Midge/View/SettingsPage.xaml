@@ -7,73 +7,78 @@
              xmlns:midgeControls="clr-namespace:Midge.MidgeControls;assembly=Midge"
              Appearing="ContentPageAppearing">
 
-	<ContentPage.Resources>
-		<ResourceDictionary>
-			<Style x:Key="LabelFontStyle" TargetType="Label">
-				<Setter Property="TextColor" Value="White" />
-				<Setter Property="FontSize" Value="20" />
-			</Style>
+	<StackLayout Orientation="Vertical">
+		<midgeControls:MidgeFrame Margin="15">
+			<StackLayout>
+				<Label  Text="CONNECTION SETTINGS" Style="{StaticResource MidgeLabelHStyle}" HorizontalTextAlignment="Center"></Label>
 
-			<Style x:Key="LabelStyle2" TargetType="Label" BasedOn="{StaticResource LabelFontStyle}">
-				<Setter Property="VerticalTextAlignment" Value="Center"></Setter>
-				<!--<Setter Property="TextDecorations" Value="Underline"></Setter>-->
-				<Setter Property="Margin" Value="10, 0, 0, 0"></Setter>
-			</Style>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"></RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Grid.Column="0" Text="IP Address:" VerticalTextAlignment="Center" />
 
-			<Style x:Key="Line" TargetType="BoxView">
-				<Setter Property="HeightRequest" Value="2" />
-				<Setter Property="BackgroundColor" Value="White" />
-				<Setter Property="HorizontalOptions" Value="FillAndExpand" />
-			</Style>
+					<midgeControls:MidgeEntry UnderlineColor="#3F51B5" x:Name="IpEntry" Grid.Row="0" Grid.Column="1" Keyboard="Text"  />
+				</Grid>
 
-		</ResourceDictionary>
-	</ContentPage.Resources>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"></RowDefinition>
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Text="Port:"  VerticalTextAlignment="Center" />
+					<midgeControls:MidgeEntry  UnderlineColor="#3F51B5" Grid.Row="0" x:Name="PortEntry" Grid.Column="1" Keyboard="Numeric" />
+				</Grid>
 
-	<StackLayout BackgroundColor="#303030" Orientation="Vertical">
+				<Button Text="CHECK CONNECTION" HeightRequest="40" WidthRequest="225" Style="{StaticResource MidgeButtonLStyle}"  HorizontalOptions="Center" />
 
-		<BoxView Style="{StaticResource Line}" />
-		<Label  Text="CONNECTION SETTINGS" Style="{StaticResource LabelFontStyle}" HorizontalTextAlignment="Center"></Label>
-		<BoxView Style="{StaticResource Line}" />
+			</StackLayout>
+		</midgeControls:MidgeFrame>
 
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*" />
-				<ColumnDefinition Width="2*" />
-			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Grid.Column="0" Text="IP Address:" Style="{StaticResource LabelStyle2}"/>
+		<midgeControls:MidgeFrame Margin="15">
+			<StackLayout>
+				<Label  Text="PRIVACY SETTINGS" Style="{StaticResource MidgeLabelHStyle}" HorizontalTextAlignment="Center"></Label>
 
-			<midgeControls:MidgeEntry  x:Name="IpEntry" Grid.Row="0" Grid.Column="1" Keyboard="Text" 
-			         Style="{StaticResource LabelFontStyle}" />
-		</Grid>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"></RowDefinition>
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
 
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="auto"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*" />
-				<ColumnDefinition Width="2*" />
-			</Grid.ColumnDefinitions>
-			<Label Grid.Row="0" Text="Port:" Style="{StaticResource LabelStyle2}"  />
-			<midgeControls:MidgeEntry Grid.Row="0" x:Name="PortEntry" Grid.Column="1"  Style="{StaticResource LabelFontStyle}"
-			       Keyboard="Numeric" />
-		</Grid>
+					<Label Grid.Row="0" Grid.Column="0" Text="Login:" VerticalTextAlignment="Center" />
 
-		<StackLayout Orientation="Vertical" Margin="0, 5, 0, 0">
-			<Button Text="Check" WidthRequest="250" HorizontalOptions="Center" />
-		</StackLayout>
+					<midgeControls:MidgeEntry UnderlineColor="#3F51B5" Grid.Row="0" Grid.Column="1" Keyboard="Text" />
 
-		<!--<BoxView Style="{StaticResource Line}" />
-		<Label  Text="SOUND SETTINGS" Style="{StaticResource LabelFontStyle}" HorizontalTextAlignment="Center"></Label>
-		<BoxView Style="{StaticResource Line}" />-->
+				</Grid>
 
-		<Button Text="Save" VerticalOptions="Fill" Clicked="ButtonClicked"></Button>
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="auto"></RowDefinition>
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="1*" />
+						<ColumnDefinition Width="2*" />
+					</Grid.ColumnDefinitions>
+					<Label Grid.Row="0" Text="Password:" VerticalTextAlignment="Center" />
+					<midgeControls:MidgeEntry  UnderlineColor="#3F51B5" Grid.Row="0" Grid.Column="1" Keyboard="Text" />
+				</Grid>
+			</StackLayout>
+			
+		</midgeControls:MidgeFrame>
 
-		
-
+		<Button Text="SAVE" Style="{StaticResource MidgeButtonStyle}" HorizontalOptions="FillAndExpand"  VerticalOptions="EndAndExpand" Margin="15, 15" Clicked="ButtonClicked"></Button>
 	</StackLayout>
 
 </ContentPage>

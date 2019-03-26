@@ -11,7 +11,7 @@ namespace Midge
 		{
 			InitializeComponent();
 
-			MainPage = new View.MainTabbedPage();
+			MainPage = new View.MainPage();
 		}
 
 		protected override void OnStart()

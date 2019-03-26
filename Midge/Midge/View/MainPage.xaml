@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Midge.View.MainPage"
+             xmlns:pages="clr-namespace:Midge.View"
+             xmlns:local="clr-namespace:Midge.ViewModel"
+             xmlns:converters="clr-namespace:Midge.Converters">
+
+	<MasterDetailPage.Master>
+		<pages:MainPageMaster x:Name="MasterPage" />
+	</MasterDetailPage.Master>
+
+	<MasterDetailPage.Resources>
+		<ResourceDictionary>
+			<local:ConnectionViewModel x:Key="ConnectionViewModel" x:Name="ConnectionViewModel" />
+			<converters:StateToImageConverter x:Key="StateToImageConverter" />
+		</ResourceDictionary>
+	</MasterDetailPage.Resources>
+
+	<MasterDetailPage.ToolbarItems>
+		<ToolbarItem Icon="{Binding  Source={StaticResource ConnectionViewModel}, Path=Connection.State, Mode=OneWay, Converter={StaticResource StateToImageConverter}}">
+		</ToolbarItem>
+	</MasterDetailPage.ToolbarItems>
+
+	<MasterDetailPage.Detail>
+		<NavigationPage>
+			<x:Arguments>
+        <pages:ProcessPage Title="Processes" />
+      </x:Arguments>
+    </NavigationPage>
+  </MasterDetailPage.Detail>
+
+</MasterDetailPage>
