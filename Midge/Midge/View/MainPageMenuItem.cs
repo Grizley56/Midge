@@ -17,5 +17,6 @@ namespace Midge.View
 		public string Title { get; set; }
 
 		public Type TargetType { get; set; }
+		public string Image { get; set; }
 	}
 }

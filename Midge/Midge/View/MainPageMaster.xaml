@@ -13,23 +13,19 @@
 		<ListView x:Name="MenuItemsListView"
               SeparatorVisibility="None"
               HasUnevenRows="true"
-              ItemsSource="{Binding MenuItems}">
+              ItemsSource="{Binding MenuItems}" BackgroundColor="white">
 
 	    <ListView.Header>
 				<Grid BackgroundColor="#303F9F">
           <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="100"/>
-          </Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*"/>
+						<ColumnDefinition Width="150"/>
+					</Grid.ColumnDefinitions>
           <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="10"/>
-          </Grid.RowDefinitions>
-
-          <Label Grid.Column="1" Grid.Row="2" Text="MIDGE" TextColor="White" Style="{StaticResource MidgeLabelHStyle}"/>
+						<RowDefinition Height="150"/>
+					</Grid.RowDefinitions>
+					<Image Source="Mosquito.png" Margin="15"></Image>
+          <Label TextDecorations="Underline" Grid.Column="1" VerticalTextAlignment="Center" FontSize="30" Text="MIDGE" TextColor="White" Style="{StaticResource MidgeLabelHStyle}"/>
         </Grid>
 
       </ListView.Header>
@@ -37,11 +33,12 @@
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
-            <StackLayout Padding="15,10" HorizontalOptions="FillAndExpand">
+						<StackLayout Padding="15,10" HorizontalOptions="Start"  Orientation="Horizontal">
+							<Image Source="{Binding Image}" WidthRequest="32"></Image>
 							<Label VerticalOptions="FillAndExpand" 
                     VerticalTextAlignment="Center" 
                     Text="{Binding Title}" 
-                    FontSize="20" TextColor="#303F9F" />
+                    FontFamily="{StaticResource Light}" FontSize="25" Margin="15, 0, 0, 0" TextColor="#303F9F" />
 						</StackLayout>
           </ViewCell>
         </DataTemplate>

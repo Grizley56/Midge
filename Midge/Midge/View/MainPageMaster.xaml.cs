@@ -33,9 +33,10 @@ namespace Midge.View
 			{
 				MenuItems = new ObservableCollection<MainPageMenuItem>(new[]
 				{
-					new MainPageMenuItem { Id = 0, Title = "Sound", TargetType = typeof(SoundPage) },
-					new MainPageMenuItem { Id = 1, Title = "Processes", TargetType = typeof(ProcessPage)},
-					new MainPageMenuItem { Id = 2, Title = "Settings", TargetType = typeof(SettingsPage) },
+					new MainPageMenuItem { Id = 0, Title = "Sound", TargetType = typeof(SoundPage), Image = "Sound.png" },
+					new MainPageMenuItem { Id = 1, Title = "Processes", TargetType = typeof(ProcessPage), Image = "Processes.png" },
+					new MainPageMenuItem { Id = 2, Title = "Settings", TargetType = typeof(SettingsPage), Image= "Settings.png" },
+					new MainPageMenuItem { Id = 3, Title = "Terminal", TargetType = typeof(TerminalPage), Image = "Terminal.png" }
 				});
 			}
 
