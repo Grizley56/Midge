@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Midge.Client.Mobile.App"
+             xmlns:local="clr-namespace:Midge.Client.Mobile.ViewModel">
+
+	<Application.Resources>
+		<ResourceDictionary>
+
+			<local:SoundViewModel x:Key="SoundViewModel" x:Name="SoundViewModel" />
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="Black">
+				<On Platform="Android" Value="brandon-grotesque-black.otf#Open Sans" />
+			</OnPlatform>
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="BoldItalic">
+				<On Platform="Android" Value="brandon-grotesque-bold-italic.otf#Open Sans" />
+			</OnPlatform>
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="LightItalic">
+				<On Platform="Android" Value="brandon-grotesque-light-italic.otf#Open Sans" />
+			</OnPlatform>
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="Light">
+				<On Platform="Android" Value="brandon-grotesque-light.otf#Open Sans" />
+			</OnPlatform>
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="MediumItalic">
+				<On Platform="Android" Value="brandon-grotesque-medium-italic.otf#Open Sans" />
+			</OnPlatform>
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="RegularItalic">
+				<On Platform="Android" Value="brandon-grotesque-regular-italic.otf#Open Sans" />
+			</OnPlatform>
+
+			<OnPlatform x:TypeArguments="x:String" x:Key="ThinItalic">
+				<On Platform="Android" Value="brandon-grotesque-thin-italic.otf#Open Sans" />
+			</OnPlatform>
+
+			<Style TargetType="Label">
+				<Setter Property="FontFamily" Value="{StaticResource Light}" />
+				<Setter Property="FontSize" Value="18" />
+			</Style>
+
+			<Style TargetType="Label" x:Key="MidgeLabelHStyle">
+				<Setter Property="FontFamily" Value="{StaticResource Black}"></Setter>
+				<Setter Property="FontSize" Value="20" />
+				<Setter Property="TextColor" Value="#3F51B5" />
+			</Style>
+
+			<Style TargetType="Button" x:Key="MidgeButtonStyle">
+				<Setter Property="BackgroundColor" Value="#303F9F" />
+				<Setter Property="CornerRadius" Value="10" />
+				<Setter Property="TextColor" Value="White" />
+			</Style>
+
+			<Style TargetType="Button" x:Key="MidgeButtonLStyle">
+				<Setter Property="BackgroundColor" Value="White" />
+				<Setter Property="BorderColor" Value="#303F9F" />
+				<Setter Property="BorderWidth" Value="0.5" />
+				<Setter Property="TextColor" Value="#303F9F" />
+			</Style>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>
