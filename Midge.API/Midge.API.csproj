@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Categories\AudioCategory.cs" />
     <Compile Include="Categories\Category.cs" />
+    <Compile Include="Categories\ControlCategory.cs" />
     <Compile Include="Categories\ProcessCategory.cs" />
     <Compile Include="Categories\TerminalCategory.cs" />
     <Compile Include="Converters\DateTimeFormatJsonConverter.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="MidgeClient.cs" />
     <Compile Include="MidgeParameters.cs" />
     <Compile Include="MidgeRestClient.cs" />
+    <Compile Include="Models\MouseButton.cs" />
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

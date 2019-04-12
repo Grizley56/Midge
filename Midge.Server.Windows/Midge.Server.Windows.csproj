@@ -63,10 +63,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Services\ConsoleApp.cs" />
+    <Compile Include="Services\ControlService.cs" />
     <Compile Include="Services\DependencySolver.cs" />
+    <Compile Include="Services\DependencySolverPlug.cs" />
     <Compile Include="Services\ProcessService.cs" />
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Utils\CertificateHelper.cs" />
+    <Compile Include="Utils\Win32.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +120,9 @@
   <ItemGroup>
     <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio">
       <Version>3.0.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="WindowsInput">
+      <Version>0.2.0</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

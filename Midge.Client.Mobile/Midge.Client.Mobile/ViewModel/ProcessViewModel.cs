@@ -10,7 +10,6 @@ using System.Windows.Input;
 using Midge.API.Models;
 using Midge.Client.Mobile.Annotations;
 using Midge.Client.Mobile.Core;
-//using MidgeContract;
 using Xamarin.Forms;
 
 namespace Midge.Client.Mobile.ViewModel
@@ -58,6 +57,9 @@ namespace Midge.Client.Mobile.ViewModel
 
 			RefreshProcessList = new Command(async () =>
 			{
+				if (MidgeCore.Instance.State == ConnectionState.Disconnected)
+					return;
+
 				ProcessModel[] processes = null;
 
 				processes = await MidgeCore.Instance.Client.Process.GetCurrentProcesses();
@@ -71,6 +73,9 @@ namespace Midge.Client.Mobile.ViewModel
 			KillSelectedProcess = new Command(async () =>
 			{
 				if (SelectedProcess == null)
+					return;
+
+				if (MidgeCore.Instance.State == ConnectionState.Disconnected)
 					return;
 
 				await MidgeCore.Instance.Client.Process.Kill(SelectedProcess.ProcessId);

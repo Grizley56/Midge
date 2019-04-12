@@ -19,7 +19,7 @@ namespace Midge.API
 		public Encoding Encoding { get; set; }
 		public TcpClient Tcp { get; private set; }
 
-		public TimeSpan ConnectionTimeout { get; set; } = TimeSpan.FromSeconds(3);
+		public TimeSpan ConnectionTimeout { get; set; } = TimeSpan.FromSeconds(2);
 
 		public TimeSpan UpdateFrequency { get; set; }
 		public TimeSpan ReceiveTimeout { get; } = TimeSpan.FromSeconds(5);

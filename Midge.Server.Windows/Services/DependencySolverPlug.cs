@@ -8,17 +8,23 @@ using Midge.Server.Services;
 
 namespace Midge.Server.Windows.Services
 {
-	public class DependencySolver : IDependencyStorage
+	public class DependencySolverPlug : IDependencyStorage
 	{
 		public IProcessService ProcessService { get; }
 		public IVolumeService VolumeService { get; }
 		public IControlService ControlService { get; }
 
-		public DependencySolver()
+		public DependencySolverPlug()
 		{
 			ProcessService = new ProcessService();
-			VolumeService = new VolumeService();
+			VolumeService = new VolumeServicePlug();
 			ControlService = new ControlService();
 		}
+	}
+
+	public class VolumeServicePlug : IVolumeService
+	{
+		public int Volume { get; set; } = 100;
+		public bool IsMute { get; set; }
 	}
 }

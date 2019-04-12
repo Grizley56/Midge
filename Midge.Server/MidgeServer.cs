@@ -60,6 +60,7 @@ namespace Midge.Server
 
 			ServiceManager.AddService(typeof(IProcessService), DependencyStorage.ProcessService);
 			ServiceManager.AddService(typeof(IVolumeService), DependencyStorage.VolumeService);
+			ServiceManager.AddService(typeof(IControlService), DependencyStorage.ControlService);
 		}
 
 		private void InternalServerMessageReceived(object sender, TcpMessageReceivedEventArgs e)
@@ -80,7 +81,7 @@ namespace Midge.Server
 			if (commandInfo == null)
 				return;
 
-			var controllerInstance = (ControllerBase)Activator.CreateInstance(controllerInfo.ControllerType,
+			var controllerInstance = (ControllerBase) Activator.CreateInstance(controllerInfo.ControllerType,
 				new object[]
 				{
 					new MidgeContext(_onlineUsers.Values, midgeUser),
@@ -98,15 +99,20 @@ namespace Midge.Server
 				if (userParam == null && param.IsRequired)
 					return; //error
 
+				Type actualParamType = param.ParamType;
+
 				if (userParam == null)
 				{
 					args.Add(null);
 					continue;
 				}
 
+				if (param.ParamType.IsGenericType && param.ParamType.GetGenericTypeDefinition() == typeof(Nullable<>))
+					actualParamType = param.ParamType.GetGenericArguments()[0];
+
 				try
 				{
-					var arg = userParam.Value.ToObject(param.ParamType);
+					var arg = userParam.Value.ToObject(actualParamType);
 					args.Add(arg);
 				}
 				catch (Exception ex)
@@ -118,7 +124,7 @@ namespace Midge.Server
 			Task t;
 
 			if (commandInfo.IsAsync)
-				t = Task.Run(() => (Task)commandInfo.MethodInfo.Invoke(controllerInstance, args.ToArray()));
+				t = Task.Run(() => (Task) commandInfo.MethodInfo.Invoke(controllerInstance, args.ToArray()));
 			else
 				t = Task.Run(() => commandInfo.MethodInfo.Invoke(controllerInstance, args.ToArray()));
 
@@ -136,7 +142,6 @@ namespace Midge.Server
 
 				e.TcpClient.SendMessage(new TcpMessage(completeResponse.ToString()));
 			});
-			
 		}
 
 		private void InternalServerConnectionClosed(object sender, TcpClientConnectionEventArgs e)

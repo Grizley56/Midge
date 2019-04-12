@@ -43,11 +43,8 @@
 						</Switch>
 					</StackLayout>
 				</StackLayout>
-				
+
 			</controls:MidgeFrame>
-
-			
-
 		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

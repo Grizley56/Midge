@@ -16,6 +16,7 @@ namespace Midge.Client.Mobile.View
 		{
 			IpEntry.Text = Settings.IpAddress;
 			PortEntry.Text = Settings.Port.ToString();
+			MouseSensitivitySlider.Value = Settings.MouseSensitivity;
 		}
 
 		private void ButtonClicked(object sender, EventArgs e)
@@ -34,6 +35,7 @@ namespace Midge.Client.Mobile.View
 
 			Settings.IpAddress = ip.ToString();
 			Settings.Port = port;
+			Settings.MouseSensitivity = (float)MouseSensitivitySlider.Value;
 		}
 	}
 }

@@ -19,6 +19,7 @@ namespace Midge.API
 	{
 		public AudioCategory Audio { get; private set; }
 		public ProcessCategory Process { get; private set; }
+		public ControlCategory Control { get; private set; }
 
 		public MidgeRestClient RestClient { get; private set; }
 
@@ -43,6 +44,7 @@ namespace Midge.API
 		{
 			Audio = new AudioCategory(this);
 			Process = new ProcessCategory(this);
+			Control = new ControlCategory(this);
 
 			_jsonSerializer = new JsonSerializer();
 			_jsonSerializer.Converters.Add(new UnixDateTimeConverter());

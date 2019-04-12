@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Timers;
@@ -56,7 +57,14 @@ namespace Midge.Client.Mobile.Core
 			if (!IPAddress.TryParse(Settings.IpAddress, out ip))
 				return;
 
-			await Client.Run(new IPEndPoint(ip, port));
+			try
+			{
+				await Client.Run(new IPEndPoint(ip, port));
+			}
+			catch
+			{
+				Debug.WriteLine("Connect failed.");
+			}
 		}
 
 		public void Start()

@@ -19,6 +19,7 @@ namespace Midge.Client.Mobile
 		{
 			MidgeCore.Instance.ReconnectionTimeout = 5000;
 			MidgeCore.Instance.Start();
+			
 		}
 
 		protected override void OnSleep()

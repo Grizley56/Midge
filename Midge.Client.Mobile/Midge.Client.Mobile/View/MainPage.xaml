@@ -25,7 +25,7 @@
 	<MasterDetailPage.Detail>
 		<NavigationPage>
 			<x:Arguments>
-        <pages:ProcessPage Title="Processes" />
+        <pages:KeyboardControlPage Title="Keyboard" />
       </x:Arguments>
     </NavigationPage>
   </MasterDetailPage.Detail>

@@ -26,7 +26,7 @@ namespace Midge.Client.Mobile.Server.Windows
 		{
 			InitializeComponent();
 			_server = new MidgeServer(8733, CertificateHelper.GenerateCertificate("Midge"));
-			_server.DependencyStorage = new DependencySolver();
+			_server.DependencyStorage = new DependencySolverPlug();
 
 			DataContext = _server;
 			_server.Start().Wait();

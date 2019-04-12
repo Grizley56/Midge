@@ -1,0 +1,217 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Midge.Client.Mobile.View.KeyboardControlPage"
+             xmlns:mc="clr-namespace:Midge.Client.Mobile.MidgeControls">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<Style TargetType="Button" x:Key="KeyboardButton">
+				<Setter Property="FontSize" Value="12"></Setter>
+			</Style>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<ContentPage.Content>
+
+		<Grid Padding="5" RowSpacing="3">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0" ColumnSpacing="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="27" Grid.Column="0" Style="{StaticResource KeyboardButton}" Text="Esc" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="112" Grid.Column="1" Style="{StaticResource KeyboardButton}" Text="F1" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="113" Grid.Column="2" Style="{StaticResource KeyboardButton}" Text="F2" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="114" Grid.Column="3" Style="{StaticResource KeyboardButton}" Text="F3" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="115" Grid.Column="4" Style="{StaticResource KeyboardButton}" Text="F4" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="116" Grid.Column="5" Style="{StaticResource KeyboardButton}" Text="F5" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="117" Grid.Column="6" Style="{StaticResource KeyboardButton}" Text="F6" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="118" Grid.Column="7" Style="{StaticResource KeyboardButton}" Text="F7" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="119" Grid.Column="8" Style="{StaticResource KeyboardButton}" Text="F8" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="120" Grid.Column="9" Style="{StaticResource KeyboardButton}" Text="F9" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="121" Grid.Column="10" Style="{StaticResource KeyboardButton}" Text="F10" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="122" Grid.Column="11" Style="{StaticResource KeyboardButton}" Text="F11" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="123" Grid.Column="12" Style="{StaticResource KeyboardButton}" Text="F12" />
+
+			</Grid>
+
+			<Grid Grid.Row="1" ColumnSpacing="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="0.8*" />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition Width="2*"/>
+				</Grid.ColumnDefinitions>
+
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="192" Grid.Column="0" Style="{StaticResource KeyboardButton}" Text="`" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="49" Grid.Column="1" Style="{StaticResource KeyboardButton}" Text="1" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="50" Grid.Column="2" Style="{StaticResource KeyboardButton}" Text="2" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="51" Grid.Column="3" Style="{StaticResource KeyboardButton}" Text="3" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="52" Grid.Column="4" Style="{StaticResource KeyboardButton}" Text="4" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="53" Grid.Column="5" Style="{StaticResource KeyboardButton}" Text="5" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="54" Grid.Column="6" Style="{StaticResource KeyboardButton}" Text="6" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="55" Grid.Column="7" Style="{StaticResource KeyboardButton}" Text="7" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="56" Grid.Column="8" Style="{StaticResource KeyboardButton}" Text="8" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="57" Grid.Column="9" Style="{StaticResource KeyboardButton}" Text="9" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="48" Grid.Column="10" Style="{StaticResource KeyboardButton}" Text="0" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="189" Grid.Column="11" Style="{StaticResource KeyboardButton}" Text="-" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="187" Grid.Column="12" Style="{StaticResource KeyboardButton}" Text="=" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="8" Grid.Column="13" Style="{StaticResource KeyboardButton}" Text="BckSpc" />
+
+			</Grid>
+
+			<Grid Grid.Row="2" ColumnSpacing="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1.4*" />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition Width="1.4*"/>
+				</Grid.ColumnDefinitions>
+
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="9" Grid.Column="0" Style="{StaticResource KeyboardButton}" Text="TAB" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="81" Grid.Column="1" Style="{StaticResource KeyboardButton}" Text="Q" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="87" Grid.Column="2" Style="{StaticResource KeyboardButton}" Text="W" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="69" Grid.Column="3" Style="{StaticResource KeyboardButton}" Text="E" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="82" Grid.Column="4" Style="{StaticResource KeyboardButton}" Text="R" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="84" Grid.Column="5" Style="{StaticResource KeyboardButton}" Text="T" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="89" Grid.Column="6" Style="{StaticResource KeyboardButton}" Text="Y" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="85" Grid.Column="7" Style="{StaticResource KeyboardButton}" Text="U" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="73" Grid.Column="8" Style="{StaticResource KeyboardButton}" Text="I" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="79" Grid.Column="9" Style="{StaticResource KeyboardButton}" Text="O" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="80" Grid.Column="10" Style="{StaticResource KeyboardButton}" Text="P" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="219" Grid.Column="11" Style="{StaticResource KeyboardButton}" Text="[" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="221" Grid.Column="12" Style="{StaticResource KeyboardButton}" Text="]" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="220" Grid.Column="13" Style="{StaticResource KeyboardButton}" Text="\" />
+
+			</Grid>
+
+			<Grid Grid.Row="3" ColumnSpacing="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2.1*" />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition Width="2.1*"/>
+				</Grid.ColumnDefinitions>
+
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="20" Grid.Column="0" Style="{StaticResource KeyboardButton}" Text="CAPS" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="65" Grid.Column="1" Style="{StaticResource KeyboardButton}" Text="A" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="83" Grid.Column="2" Style="{StaticResource KeyboardButton}" Text="S" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="68" Grid.Column="3" Style="{StaticResource KeyboardButton}" Text="D" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="70" Grid.Column="4" Style="{StaticResource KeyboardButton}" Text="F" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="71" Grid.Column="5" Style="{StaticResource KeyboardButton}" Text="G" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="72" Grid.Column="6" Style="{StaticResource KeyboardButton}" Text="H" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="74" Grid.Column="7" Style="{StaticResource KeyboardButton}" Text="J" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="75" Grid.Column="8" Style="{StaticResource KeyboardButton}" Text="K" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="76" Grid.Column="9" Style="{StaticResource KeyboardButton}" Text="L" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="186" Grid.Column="10" Style="{StaticResource KeyboardButton}" Text=";" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="222" Grid.Column="11" Style="{StaticResource KeyboardButton}" Text="'" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="13" Grid.Column="12" Style="{StaticResource KeyboardButton}" Text="ENTER" />
+
+			</Grid>
+
+			<Grid Grid.Row="4" ColumnSpacing="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2.8*" />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+
+				</Grid.ColumnDefinitions>
+
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="16" Grid.Column="0" Style="{StaticResource KeyboardButton}" Text="SHIFT" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="90" Grid.Column="1" Style="{StaticResource KeyboardButton}" Text="Z" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="88" Grid.Column="2" Style="{StaticResource KeyboardButton}" Text="X" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="67" Grid.Column="3" Style="{StaticResource KeyboardButton}" Text="C" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="86" Grid.Column="4" Style="{StaticResource KeyboardButton}" Text="V" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="66" Grid.Column="5" Style="{StaticResource KeyboardButton}" Text="B" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="78" Grid.Column="6" Style="{StaticResource KeyboardButton}" Text="N" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="77" Grid.Column="7" Style="{StaticResource KeyboardButton}" Text="M" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="188" Grid.Column="8" Style="{StaticResource KeyboardButton}" Text="," />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="190" Grid.Column="9" Style="{StaticResource KeyboardButton}" Text="." />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="38" Grid.Column="10" Style="{StaticResource KeyboardButton}" Text="^" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="191" Grid.Column="11" Style="{StaticResource KeyboardButton}" Text="/" />
+			</Grid>
+
+			<Grid Grid.Row="5" ColumnSpacing="3">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="1.5*" />
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="1.5*"/>
+					<ColumnDefinition Width="7*"/>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="17" Grid.Column="0" Style="{StaticResource KeyboardButton}" Text="CTRL" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="91" Grid.Column="1" Style="{StaticResource KeyboardButton}" Text="WIN" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="18" Grid.Column="2" Style="{StaticResource KeyboardButton}" Text="ALT" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="32" Grid.Column="3" Style="{StaticResource KeyboardButton}"  />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="37" Grid.Column="4" Style="{StaticResource KeyboardButton}" Text="&lt;"/>
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="40" Grid.Column="5" Style="{StaticResource KeyboardButton}" Text="V" />
+				<mc:MidgeKeyboardButton Tapped="KeyboardTapped" KeyPressed="KeyboardPressed" KeyReleased="KeyboardReleased" VirtualCode="39" Grid.Column="6" Style="{StaticResource KeyboardButton}" Text="&gt;" />
+				
+
+			</Grid>
+		</Grid>
+    </ContentPage.Content>
+</ContentPage>

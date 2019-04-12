@@ -11,10 +11,7 @@ namespace Midge.Client.Mobile.Core
 	/// </summary>
 	public static class Settings
 	{
-		private static ISettings AppSettings
-		{
-			get { return CrossSettings.Current; }
-		}
+		private static ISettings AppSettings => CrossSettings.Current;
 
 		#region Setting Constants
 		private const string IpAddressKey = "ip_address";
@@ -25,6 +22,9 @@ namespace Midge.Client.Mobile.Core
 
 		private const string ReconnectionTimeoutKey = "reconnectionTimeout";
 		private static readonly int ReconnectionTimeoutDefault = 5000;
+
+		private const string MouseSensitivityKey = "mouseSensitivity";
+		private static readonly float MouseSensitivityDefault = 1f;
 
 		#endregion
 
@@ -44,6 +44,12 @@ namespace Midge.Client.Mobile.Core
 		{
 			get => AppSettings.GetValueOrDefault(ReconnectionTimeoutKey, ReconnectionTimeoutDefault);
 			set => AppSettings.AddOrUpdateValue(ReconnectionTimeoutKey, value);
+		}
+
+		public static float MouseSensitivity
+		{
+			get => AppSettings.GetValueOrDefault(MouseSensitivityKey, MouseSensitivityDefault);
+			set => AppSettings.AddOrUpdateValue(MouseSensitivityKey, value);
 		}
 	}
 

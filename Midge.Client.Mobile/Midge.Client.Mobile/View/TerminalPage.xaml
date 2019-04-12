@@ -5,6 +5,7 @@
 	<ContentPage.Content>
 		<StackLayout>
 			<Editor>
+
 			</Editor>
 		</StackLayout>
 	</ContentPage.Content>
