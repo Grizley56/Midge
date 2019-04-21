@@ -63,11 +63,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AudioCapturer.cs" />
+    <Compile Include="Services\AudioStreamService.cs" />
     <Compile Include="Services\ConsoleApp.cs" />
     <Compile Include="Services\ControlService.cs" />
     <Compile Include="Services\DependencySolver.cs" />
     <Compile Include="Services\DependencySolverPlug.cs" />
     <Compile Include="Services\ProcessService.cs" />
+    <Compile Include="Services\SoundInSourceWrapper.cs" />
     <Compile Include="Services\VolumeService.cs" />
     <Compile Include="Utils\CertificateHelper.cs" />
     <Compile Include="Utils\Win32.cs" />
@@ -119,7 +122,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio">
-      <Version>3.0.0.1</Version>
+      <Version>3.1.0-beta1</Version>
+    </PackageReference>
+    <PackageReference Include="CSCore">
+      <Version>1.2.1.2</Version>
     </PackageReference>
     <PackageReference Include="WindowsInput">
       <Version>0.2.0</Version>

@@ -25,14 +25,14 @@ namespace Midge.Server.Windows.Services
 				if (value < 0 || value > 100)
 					throw new ArgumentOutOfRangeException(nameof(value));
 
-				_audioController.DefaultPlaybackDevice.Volume = value;
+				_audioController.DefaultPlaybackDevice.SetVolumeAsync(value).ConfigureAwait(false).GetAwaiter().GetResult();
 			}
 		}
 
 		public bool IsMute
 		{
 			get => _audioController.DefaultPlaybackDevice.IsMuted;
-			set => _audioController.DefaultPlaybackDevice.Mute(value);
+			set => _audioController.DefaultPlaybackDevice.MuteAsync(value).ConfigureAwait(false).GetAwaiter().GetResult();
 		}
 	}
 }

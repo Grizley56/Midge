@@ -78,9 +78,9 @@ namespace Midge.API
 			await RestClient.Stop();
 		}
 
-		public Task SendAsync(string methodName, MidgeParameters parameters)
+		public Task SendAsync(string method, MidgeParameters parameters)
 		{
-			var request = CreateRequest(methodName, parameters);
+			var request = CreateRequest(method, parameters);
 
 			return RestClient.SendMessageAsync(request.ToString());
 		}
@@ -111,11 +111,11 @@ namespace Midge.API
 			RestClient.SendMessage(request.ToString());
 		}
 
-		public T SendAndWait<T>(string methodName, MidgeParameters parameters, int timeout = 100000)
+		public T SendAndWait<T>(string method, MidgeParameters parameters, int timeout = 100000)
 		{
 			Guid commandToken = Guid.NewGuid();
 
-			var request = CreateRequest(methodName, parameters, commandToken);
+			var request = CreateRequest(method, parameters, commandToken);
 
 			ResponseWaiter waiter = new ResponseWaiter(commandToken);
 

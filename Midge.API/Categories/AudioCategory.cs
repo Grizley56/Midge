@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Midge.API.Models;
 
 namespace Midge.API.Categories
 {
@@ -60,6 +61,39 @@ namespace Midge.API.Categories
 			{
 				{"value", value}
 			});
+		}
+
+
+		public AudioStreamInfo StartAudioStream(int port, int sampleRate = 44100, int bitDepth = 128, AudioChannel channel = AudioChannel.Mono)
+		{
+			return MidgeInvoke.SendAndWait<AudioStreamInfo>("audio.startAudioStream", new MidgeParameters
+			{
+				{"port", port},
+				{"sample_rate", sampleRate},
+				{"bit_depth", bitDepth},
+				{"channel", (int)channel}
+			});
+		}
+
+		public Task<AudioStreamInfo> StartAudioStreamAsync(int port, int sampleRate = 44100, int bitDepth = 128, AudioChannel channel = AudioChannel.Mono)
+		{
+			return MidgeInvoke.SendAndWaitAsync<AudioStreamInfo>("audio.startAudioStream", new MidgeParameters
+			{
+				{"port", port},
+				{"sample_rate", sampleRate},
+				{"bit_depth", bitDepth},
+				{"channel", (int)channel}
+			});
+		}
+
+		public void StopAudioStream()
+		{
+			MidgeInvoke.Send("audio.stopAudioStream", MidgeParameters.Empty);
+		}
+
+		public Task StopAudioStreamAsync()
+		{
+			return MidgeInvoke.SendAsync("audio.stopAudioStream", MidgeParameters.Empty);
 		}
 
 		public AudioCategory(IMidgeInvoke midgeInvoke) 

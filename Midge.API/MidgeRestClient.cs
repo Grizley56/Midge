@@ -142,6 +142,9 @@ namespace Midge.API
 
 		public async Task SendMessageAsync(byte[] message)
 		{
+			if (!IsStarted)
+				throw new InvalidOperationException("TcpClient stopped");
+
 			await _semaphore.WaitAsync();
 
 			try
@@ -163,6 +166,9 @@ namespace Midge.API
 
 		public void SendMessage(byte[] message)
 		{
+			if (!IsStarted)
+				throw new InvalidOperationException("TcpClient stopped");
+
 			_semaphore.Wait();
 
 			try

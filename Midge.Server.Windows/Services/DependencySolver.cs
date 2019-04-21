@@ -13,12 +13,14 @@ namespace Midge.Server.Windows.Services
 		public IProcessService ProcessService { get; }
 		public IVolumeService VolumeService { get; }
 		public IControlService ControlService { get; }
+		public IAudioStreamService AudioStreamService { get; }
 
 		public DependencySolver()
 		{
 			ProcessService = new ProcessService();
 			VolumeService = new VolumeService();
 			ControlService = new ControlService();
+			AudioStreamService = new AudioStreamService();
 		}
 	}
 }

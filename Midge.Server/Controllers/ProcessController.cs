@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using JetBrains.Annotations;
+using Midge.Server.Communication;
+using Midge.Server.Communication.Core;
 using Midge.Server.Core;
 using Midge.Server.Services;
 using Newtonsoft.Json;
@@ -16,7 +18,7 @@ namespace Midge.Server.Controllers
 	{
 		private IProcessService _processService;
 
-		public ProcessController(IContext context, IServiceManager serviceManager) 
+		public ProcessController(MidgeContext context, IServiceManager serviceManager) 
 			: base(context, serviceManager)
 		{
 			_processService = Services.GetService<IProcessService>();

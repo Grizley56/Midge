@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Midge.Client.Mobile.Annotations;
+using JetBrains.Annotations;
+
 
 namespace Midge.Client.Mobile.Model
 {

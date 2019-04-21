@@ -10,7 +10,7 @@ namespace Midge.Client.Mobile.View
 	{
 		public MainPageMenuItem()
 		{
-			TargetType = typeof(KeyboardControlPage);
+			//TargetType = typeof(SoundPage);
 		}
 
 		public int Id { get; set; }

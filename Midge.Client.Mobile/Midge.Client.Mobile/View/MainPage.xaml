@@ -25,7 +25,7 @@
 	<MasterDetailPage.Detail>
 		<NavigationPage>
 			<x:Arguments>
-        <pages:KeyboardControlPage Title="Keyboard" />
+        <pages:SoundPage Title="Sound" />
       </x:Arguments>
     </NavigationPage>
   </MasterDetailPage.Detail>

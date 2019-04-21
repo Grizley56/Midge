@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Net;
+using JetBrains.Annotations;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
@@ -20,6 +22,13 @@ namespace Midge.Client.Mobile.Core
 		private const string PortKey = "port";
 		private static readonly int PortDefault = 8733;
 
+		private const string StreamingServerPortKey = "s_streaming_port";
+		private static readonly int StreamingServerPortDefault = 8734;
+
+
+		private const string StreamingClientPortKey = "streaming_port";
+		private static readonly int StreamingClientPortDefault = 6602;
+
 		private const string ReconnectionTimeoutKey = "reconnectionTimeout";
 		private static readonly int ReconnectionTimeoutDefault = 5000;
 
@@ -40,6 +49,18 @@ namespace Midge.Client.Mobile.Core
 			set => AppSettings.AddOrUpdateValue(PortKey, value);
 		}
 
+		public static int StreamingServerPort
+		{
+			get => AppSettings.GetValueOrDefault(StreamingServerPortKey, StreamingServerPortDefault);
+			set => AppSettings.AddOrUpdateValue(StreamingServerPortKey, value);
+		}
+
+		public static int StreamingClientPort
+		{
+			get => AppSettings.GetValueOrDefault(StreamingClientPortKey, StreamingClientPortDefault);
+			set => AppSettings.AddOrUpdateValue(StreamingClientPortKey, value);
+		}
+
 		public static int ReconnectionTimeout
 		{
 			get => AppSettings.GetValueOrDefault(ReconnectionTimeoutKey, ReconnectionTimeoutDefault);
@@ -50,6 +71,38 @@ namespace Midge.Client.Mobile.Core
 		{
 			get => AppSettings.GetValueOrDefault(MouseSensitivityKey, MouseSensitivityDefault);
 			set => AppSettings.AddOrUpdateValue(MouseSensitivityKey, value);
+		}
+
+		[CanBeNull]
+		public static IPEndPoint ServerAddress
+		{
+			get
+			{
+				IPAddress ip;
+
+				int port = Settings.Port;
+
+				if (!IPAddress.TryParse(Settings.IpAddress, out ip))
+					return null;
+
+				return new IPEndPoint(ip, port);
+			}
+		}
+
+		[CanBeNull]
+		public static IPEndPoint ServerStreamAddress
+		{
+			get
+			{
+				IPAddress ip;
+
+				int port = Settings.StreamingServerPort;
+
+				if (!IPAddress.TryParse(Settings.IpAddress, out ip))
+					return null;
+
+				return new IPEndPoint(ip, port);
+			}
 		}
 	}
 

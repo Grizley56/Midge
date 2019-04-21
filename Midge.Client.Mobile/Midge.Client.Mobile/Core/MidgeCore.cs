@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Timers;
 using Midge.API;
 
@@ -50,16 +51,19 @@ namespace Midge.Client.Mobile.Core
 			if (State == ConnectionState.Connected)
 				return;
 
-			IPAddress ip;
 
-			int port = Settings.Port;
+		}
 
-			if (!IPAddress.TryParse(Settings.IpAddress, out ip))
+		private async Task TryConnect()
+		{
+			IPEndPoint address = Settings.ServerAddress;
+
+			if (address == null)
 				return;
 
 			try
 			{
-				await Client.Run(new IPEndPoint(ip, port));
+				await Client.Run(address);
 			}
 			catch
 			{
@@ -67,8 +71,10 @@ namespace Midge.Client.Mobile.Core
 			}
 		}
 
-		public void Start()
+		public async void Start()
 		{
+			await TryConnect();
+
 			_connectTimer.Start();
 		}
 

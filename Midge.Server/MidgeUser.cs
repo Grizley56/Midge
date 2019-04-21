@@ -1,27 +1,22 @@
 ﻿using System;
+using System.Net;
 
 namespace Midge.Server
 {
 	public class MidgeUser
 	{
-		public string UserName { get; }
+		public MidgeCredentials Credentials { get; }
 		public DateTime SignInDateTime { get; }
+		public IPAddress Ip { get; }
 
-		public bool IsAuthorized { get; set; } = false;
-
-		private bool _isUnknown;
-
-		public MidgeUser(string userName, DateTime signInDateTime)
+		public MidgeUser(MidgeCredentials credentials, IPAddress ip, DateTime signInDateTime)
 		{
-			UserName = UserName;
+			Credentials = credentials;
+			Ip = ip;
 			SignInDateTime = signInDateTime;
 		}
 
-		protected MidgeUser()
-		{
-			_isUnknown = true;
-		}
 
-		public static MidgeUser Unknown => new MidgeUser();
+
 	}
 }

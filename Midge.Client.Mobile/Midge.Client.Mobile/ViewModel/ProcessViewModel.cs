@@ -7,8 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows.Input;
+using JetBrains.Annotations;
 using Midge.API.Models;
-using Midge.Client.Mobile.Annotations;
 using Midge.Client.Mobile.Core;
 using Xamarin.Forms;
 

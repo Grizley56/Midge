@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Midge.Server.Communication;
+using Midge.Server.Communication.Core;
 using Midge.Server.Core;
 using Midge.Server.Services;
 
@@ -10,7 +12,7 @@ namespace Midge.Server.Controllers
 	class ControlController: ControllerBase
 	{
 		private readonly IControlService _controlService;
-		public ControlController(IContext context, IServiceManager serviceManager) : base(context, serviceManager)
+		public ControlController(MidgeContext context, IServiceManager serviceManager) : base(context, serviceManager)
 		{
 			_controlService = Services.GetService<IControlService>();
 		}

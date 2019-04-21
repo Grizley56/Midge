@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Midge.Server;
+using Midge.Server.Core;
 using Midge.Server.Windows.Services;
 using Midge.Server.Windows.Utils;
 
@@ -21,27 +22,29 @@ namespace Midge.Client.Mobile.Server.Windows
 	public partial class MainWindow : Window
 	{
 		private MidgeServer _server;
+		private IDependencyStorage _dep = new DependencySolverPlug();
 
 		public MainWindow()
 		{
 			InitializeComponent();
 			_server = new MidgeServer(8733, CertificateHelper.GenerateCertificate("Midge"));
-			_server.DependencyStorage = new DependencySolverPlug();
-
 			DataContext = _server;
-			_server.Start().Wait();
-
-			
 		}
 
 		private async void Start(object sender, RoutedEventArgs e)
 		{
+			_server.DependencyStorage = _dep;
 			await _server.Start();
 		}
 
 		private async void Stop(object sender, RoutedEventArgs e)
 		{
 			await _server.Stop();
+		}
+
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

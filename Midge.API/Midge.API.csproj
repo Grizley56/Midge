@@ -58,6 +58,8 @@
     <Compile Include="MidgeClient.cs" />
     <Compile Include="MidgeParameters.cs" />
     <Compile Include="MidgeRestClient.cs" />
+    <Compile Include="Models\AudioChannel.cs" />
+    <Compile Include="Models\AudioStreamInfo.cs" />
     <Compile Include="Models\MouseButton.cs" />
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

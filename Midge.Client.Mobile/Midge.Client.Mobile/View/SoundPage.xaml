@@ -4,13 +4,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Midge.Client.Mobile.View.SoundPage"
 						 xmlns:local2="clr-namespace:Midge.Client.Mobile.ViewModel"
-             xmlns:controls="clr-namespace:Midge.Client.Mobile.MidgeControls">
+             xmlns:controls="clr-namespace:Midge.Client.Mobile.MidgeControls"
+             xmlns:midge="clr-namespace:Midge.API.Models;assembly=Midge.API"
+             xmlns:converters="clr-namespace:Midge.Client.Mobile.Converters">
 
 	<ContentPage.Resources>
 		<ResourceDictionary>
-
-
-			
+			<converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+			<converters:BoolToTextConverter x:Key="BoolToTextConverter" />
 		</ResourceDictionary>
 	</ContentPage.Resources>
 
@@ -44,6 +45,66 @@
 					</StackLayout>
 				</StackLayout>
 
+			</controls:MidgeFrame>
+
+			<controls:MidgeFrame Elevation="30" CornerRadius="10">
+				<AbsoluteLayout>
+					<Grid AbsoluteLayout.LayoutFlags="All"
+					      AbsoluteLayout.LayoutBounds="0,0,1,1" 
+					      IsVisible="{
+						Binding Source={StaticResource SoundViewModel}, 
+						Path=AudioStreamToggled, 
+						Converter={StaticResource InverseBoolConverter}
+						}">
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+							<RowDefinition />
+						</Grid.RowDefinitions>
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+
+						<Label Grid.ColumnSpan="2" Grid.Row="0"  Text="AUDIO STREAM" HorizontalTextAlignment="Center" Style="{StaticResource MidgeLabelHStyle}" ></Label>
+
+						<Label Text="Sample rate: " Grid.Row="1" Grid.Column="0" />
+						<Picker Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding Source={StaticResource SoundViewModel}, Path=SampleRates}"
+						        SelectedItem="{Binding Source={StaticResource SoundViewModel}, Path=AudioStream.SampleRate, Mode=TwoWay}" />
+
+						<Label Text="Bit depth" Grid.Row="2" Grid.Column="0" />
+						<Picker Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Source={StaticResource SoundViewModel}, Path=BitDepths}"
+						        SelectedItem="{Binding Source={StaticResource SoundViewModel}, Path=AudioStream.BitDepth}"></Picker>
+
+						<Label Text="Channel" Grid.Row="3" Grid.Column="0" />
+						<controls:MidgeEnumPicker x:TypeArguments="midge:AudioChannel" 
+						                          SelectedItem="{Binding Source={StaticResource SoundViewModel}, Path=AudioStream.Channel}" 
+						                          SelectedIndex="0" Grid.Row="3" Grid.Column="1" />
+
+						<Button Text="{Binding Source={StaticResource SoundViewModel}, Path=AudioStreamClient.IsStarted, Converter={StaticResource BoolToTextConverter}}" 
+						        Grid.Row="4" Grid.ColumnSpan="2" Grid.Column="0"
+						        Command="{Binding Source={StaticResource SoundViewModel}, Path=ToggleAudioStream}" />
+
+					</Grid >
+
+
+					<BoxView AbsoluteLayout.LayoutFlags="All"
+						AbsoluteLayout.LayoutBounds="0,0,1,1" 
+						BackgroundColor="#303F9F" Opacity="0.4"
+						IsVisible="{ Binding Source={StaticResource SoundViewModel}, Path=AudioStreamToggled }" />
+
+					<ActivityIndicator x:Name="LoadingIndicator"
+					                   AbsoluteLayout.LayoutFlags="PositionProportional"
+					                   AbsoluteLayout.LayoutBounds="0.5,0.5,-1,-1"
+					                   IsRunning="{Binding Source={StaticResource SoundViewModel}, Path=AudioStreamToggled }"
+					                   IsVisible="{Binding Source={StaticResource SoundViewModel}, Path=AudioStreamToggled }"
+					                   Color="White"/>
+
+				</AbsoluteLayout>
+				
 			</controls:MidgeFrame>
 		</StackLayout>
 	</ContentPage.Content>

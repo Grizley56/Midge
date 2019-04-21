@@ -6,12 +6,16 @@ using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using Midge.Server.Communication;
+using Midge.Server.Communication.Core;
+using Midge.Server.Communication.Parsers;
 using Midge.Server.Controllers;
 using Midge.Server.Core;
 using Midge.Server.Extensions;
 using Midge.Server.Services;
-using Midge.Server.Ssl;
-using Midge.Server.Tcp;
+using Midge.Server.Web.Ssl;
+using Midge.Server.Web.Tcp;
+using Midge.Server.Web.Udp;
 using Newtonsoft.Json.Linq;
 
 namespace Midge.Server
@@ -23,32 +27,33 @@ namespace Midge.Server
 
 		public Encoding Encoding { get; set; } = Encoding.UTF8;
 
-		public TcpSslServer InternalServer { get; private set; }
+		public TcpSslServer InternalTcp { get; private set; }
+		public UdpServer InternalUdp { get; private set; }
 
-		public IReadOnlyCollection<MidgeUser> OnlineUsers => _onlineUsers.Values.AsReadOnly();
+		private readonly MidgeControllerFactory _controllerFactory;
+		private readonly IClientJsonMessageParser _clientMessageParser;
+		private readonly IServerJsonMessageParser _serverMessageParser;
 
-		private readonly ConcurrentDictionary<ITcpClientConnection, MidgeUser> _onlineUsers;
-
-		public IJsonMessageParser MessageParser { get; set; }
-		public IControllerParser ControllerParser { get; set; }
+		public IMidgeUsersManager UsersManager { get; set; }
+		public IAudioBroadcaster AudioBroadcaster { get; set; }
 		public IDependencyStorage DependencyStorage { get; set; }
 		public IServiceManager ServiceManager { get; set; }
-			
+
 		public MidgeServer(int port, X509Certificate certificate)
 		{
 			Ip = new IPEndPoint(IPAddress.Any, port);
 			Certificate = certificate;
 
-			InternalServer = new TcpSslServer(Ip, Certificate);
+			InternalTcp = new TcpSslServer(Ip, Certificate);
+			InternalUdp = new UdpServer(port + 1);
 
-			InternalServer.ConnectionOpened += InternalServerConnectionOpened;
-			InternalServer.ConnectionClosed += InternalServerConnectionClosed;
-			InternalServer.MessageReceived += InternalServerMessageReceived;
-			_onlineUsers = new ConcurrentDictionary<ITcpClientConnection, MidgeUser>();
-
-			MessageParser = new JsonMessageParser();
-			ControllerParser = new MidgeControllerParser();
+			UsersManager = new MidgeUsersManager(InternalTcp);
+			AudioBroadcaster = new AudioBroadcaster(InternalUdp);
 			ServiceManager = new MidgeServiceManager();
+
+			_clientMessageParser = new ClientMessageParser();
+			_serverMessageParser = new ServerMessageParser();
+			_controllerFactory = new MidgeControllerFactory(new MidgeControllerParser());
 		}
 
 		private void InitializeServices()
@@ -61,109 +66,60 @@ namespace Midge.Server
 			ServiceManager.AddService(typeof(IProcessService), DependencyStorage.ProcessService);
 			ServiceManager.AddService(typeof(IVolumeService), DependencyStorage.VolumeService);
 			ServiceManager.AddService(typeof(IControlService), DependencyStorage.ControlService);
+			ServiceManager.AddService(typeof(IAudioStreamService), DependencyStorage.AudioStreamService);
 		}
 
 		private void InternalServerMessageReceived(object sender, TcpMessageReceivedEventArgs e)
 		{
-			if (!_onlineUsers.TryGetValue(e.TcpClient, out var midgeUser))
-				return;
-
 			string message = Encoding.GetString(e.Message.GetMessage());
-			JsonMessage jsonMessage = MessageParser.Parse(message);
 
-			if (!ControllerParser.Supports(jsonMessage.Controller))
-				return;
+			ClientMessage clientMessage = _clientMessageParser.ParseFromJson(message);
 
-			MidgeControllerInfo controllerInfo = ControllerParser.GetController(jsonMessage.Controller);
+			MidgeCommandInvoker commandInvoker = _controllerFactory.Create(clientMessage);
 
-			MidgeCommandInfo commandInfo = controllerInfo.GetCommandByName(jsonMessage.Command);
-
-			if (commandInfo == null)
-				return;
-
-			var controllerInstance = (ControllerBase) Activator.CreateInstance(controllerInfo.ControllerType,
-				new object[]
+			commandInvoker.InvokeAsync(
+				new MidgeContext(e.TcpClient, UsersManager, AudioBroadcaster), ServiceManager,
+				(controller) =>
 				{
-					new MidgeContext(_onlineUsers.Values, midgeUser),
-					ServiceManager
+					if (controller.Response == null)
+						return;
+
+					var response = _serverMessageParser.Parse(controller.Response, clientMessage.Key);
+
+					e.TcpClient.SendMessage(new TcpMessage(response.ToString()));
+				}, (controller, exception) =>
+				{
+					var response = _serverMessageParser.ParseError(exception.Message, clientMessage.Key);
+
+					e.TcpClient.SendMessage(new TcpMessage(response.ToString()));
 				});
-
-
-			List<object> args = new List<object>();
-
-			foreach (var param in commandInfo.Params.OrderBy(i => i.Order))
-			{
-				var userParam = jsonMessage.Parameters.FirstOrDefault(i =>
-					i.Name.Equals(param.Name, StringComparison.OrdinalIgnoreCase));
-
-				if (userParam == null && param.IsRequired)
-					return; //error
-
-				Type actualParamType = param.ParamType;
-
-				if (userParam == null)
-				{
-					args.Add(null);
-					continue;
-				}
-
-				if (param.ParamType.IsGenericType && param.ParamType.GetGenericTypeDefinition() == typeof(Nullable<>))
-					actualParamType = param.ParamType.GetGenericArguments()[0];
-
-				try
-				{
-					var arg = userParam.Value.ToObject(actualParamType);
-					args.Add(arg);
-				}
-				catch (Exception ex)
-				{
-					return; // error
-				}
-			}
-
-			Task t;
-
-			if (commandInfo.IsAsync)
-				t = Task.Run(() => (Task) commandInfo.MethodInfo.Invoke(controllerInstance, args.ToArray()));
-			else
-				t = Task.Run(() => commandInfo.MethodInfo.Invoke(controllerInstance, args.ToArray()));
-
-			t.ContinueWith(_ =>
-			{
-				if (controllerInstance.Response == null)
-					return;
-
-				var completeResponse = new JObject(
-					new JProperty("response", controllerInstance.Response));
-
-				if (jsonMessage.Key != null)
-					completeResponse.Add(
-						new JProperty("command_token", jsonMessage.Key.Value));
-
-				e.TcpClient.SendMessage(new TcpMessage(completeResponse.ToString()));
-			});
-		}
-
-		private void InternalServerConnectionClosed(object sender, TcpClientConnectionEventArgs e)
-		{
-			_onlineUsers.TryRemove(e.TcpClient, out var _);
-		}
-
-		private void InternalServerConnectionOpened(object sender, TcpClientConnectionEventArgs e)
-		{
-			_onlineUsers.TryAdd(e.TcpClient, MidgeUser.Unknown);
 		}
 
 		public async Task Start()
 		{
+			if (UsersManager == null)
+				throw new InvalidOperationException($"{nameof(UsersManager)} is null");
+
+			if (DependencyStorage == null)
+				throw new InvalidOperationException($"{nameof(DependencyStorage)} is null");
+
+			if (ServiceManager == null)
+				throw new InvalidOperationException($"{nameof(ServiceManager)} is null");
+
 			InitializeServices();
 
-			await InternalServer.StartAsync();
+			InternalTcp.MessageReceived += InternalServerMessageReceived;
+
+			await InternalTcp.StartAsync();
+			AudioBroadcaster.Start();
 		}
 
 		public async Task Stop()
 		{
-			await InternalServer.StopAsync();
+			InternalTcp.MessageReceived -= InternalServerMessageReceived;
+
+			await InternalTcp.StopAsync();
+			AudioBroadcaster.Stop();
 		}
 	}
 }
