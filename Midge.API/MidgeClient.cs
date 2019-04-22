@@ -20,6 +20,7 @@ namespace Midge.API
 		public AudioCategory Audio { get; private set; }
 		public ProcessCategory Process { get; private set; }
 		public ControlCategory Control { get; private set; }
+		public FileManagerCategory FileManager { get; private set; }
 
 		public MidgeRestClient RestClient { get; private set; }
 
@@ -45,6 +46,7 @@ namespace Midge.API
 			Audio = new AudioCategory(this);
 			Process = new ProcessCategory(this);
 			Control = new ControlCategory(this);
+			FileManager = new FileManagerCategory(this);
 
 			_jsonSerializer = new JsonSerializer();
 			_jsonSerializer.Converters.Add(new UnixDateTimeConverter());
@@ -53,19 +55,26 @@ namespace Midge.API
 
 		private void ServerMessageReceived(object sender, MidgeMessageReceivedEventArgs e)
 		{
-			var json = JObject.Parse(e.Message);
+			try
+			{
+				var json = JObject.Parse(e.Message);
 
-			Guid? commandToken = json?["command_token"]?.ToObject<Guid>();
+				Guid? commandToken = json?["command_token"]?.ToObject<Guid>();
 
-			if (commandToken == null)
-				return;
-			
-			if (!_waiters.ContainsKey(commandToken.Value))
-				return;
+				if (commandToken == null)
+					return;
+				
+				if (!_waiters.ContainsKey(commandToken.Value))
+					return;
 
-			_waiters.TryRemove(commandToken.Value, out var waiter);
+				_waiters.TryRemove(commandToken.Value, out var waiter);
 
-			waiter.SetReady(json["response"]);
+				waiter.SetReady(json["response"]);
+			}
+			catch
+			{
+				;
+			}
 		}
 
 		public async Task Run(IPEndPoint ip)

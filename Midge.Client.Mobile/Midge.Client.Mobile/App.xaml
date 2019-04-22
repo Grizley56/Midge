@@ -8,6 +8,7 @@
 		<ResourceDictionary>
 
 			<local:SoundViewModel x:Key="SoundViewModel" x:Name="SoundViewModel" />
+			
 
 			<OnPlatform x:TypeArguments="x:String" x:Key="Black">
 				<On Platform="Android" Value="brandon-grotesque-black.otf#Open Sans" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
@@ -87,6 +88,7 @@ namespace Midge.Server
 					var response = _serverMessageParser.Parse(controller.Response, clientMessage.Key);
 
 					e.TcpClient.SendMessage(new TcpMessage(response.ToString()));
+					Debug.WriteLine("es! " + response.ToString());
 				}, (controller, exception) =>
 				{
 					var response = _serverMessageParser.ParseError(exception.Message, clientMessage.Key);

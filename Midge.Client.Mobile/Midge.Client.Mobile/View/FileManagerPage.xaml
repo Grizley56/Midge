@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Midge.Client.Mobile.Converters;assembly=Midge.Client.Mobile"
+             xmlns:viewModel="clr-namespace:Midge.Client.Mobile.ViewModel;assembly=Midge.Client.Mobile"
+             x:Class="Midge.Client.Mobile.View.FileManagerPage"
+             xmlns:midgeControls="clr-namespace:Midge.Client.Mobile.MidgeControls" >
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<converters:InverseBoolConverter x:Key="InverseBoolConverter" />
+			<converters:BoolToTextConverter x:Key="BoolToTextConverter" />
+			<converters:BytesToStringConverter x:Key="BytesToStringConverter"></converters:BytesToStringConverter>
+			<converters:TypeToSizeVisibleConverter x:Key="TypeToSizeVisibleConverter" />
+			<viewModel:FileManagerViewModel x:Key="FileManagerViewModel" x:Name="FileManagerViewModel" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+
+	<ContentPage.Content>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="35" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="60" />
+			</Grid.RowDefinitions>
+
+
+			<Label Text="{Binding CurrentEntry.FilePath}" HorizontalTextAlignment="Center"  VerticalOptions="Center"
+			       VerticalTextAlignment="Start" Grid.Row="0" Margin="5,5,5,0" TextColor="#303F9F" />
+
+			<StackLayout Grid.Row="1" Margin="0,10,0,25">
+				<midgeControls:MidgeFrame Elevation="15" CornerRadius="10">
+					<ListView ItemsSource="{Binding Entries}" 
+					          SelectedItem="{Binding SelectedEntry, Mode=TwoWay}" Margin="5,0,5,0"
+					          SeparatorColor="#2196F3" HasUnevenRows="True" ItemTapped="ListView_ItemTapped">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<ViewCell.View>
+										<StackLayout HeightRequest="50" WidthRequest="200" 
+										             Orientation="Horizontal" Padding="0,5,0,5">
+											<Image Source="{Binding Icon}"></Image>
+											<StackLayout Orientation="Vertical">
+												<Label Margin="15,0,0,0" Text="{Binding Name}" VerticalOptions="Center"/>
+												<Label FontSize="Micro" IsVisible="{Binding Type, Converter={StaticResource TypeToSizeVisibleConverter}}"
+												       Text="{Binding Size, Converter={StaticResource BytesToStringConverter}}"></Label>
+											</StackLayout>
+										</StackLayout>
+									</ViewCell.View>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</midgeControls:MidgeFrame>
+			</StackLayout>
+
+
+
+
+
+
+			<Grid Grid.Row="2" Margin="5">
+
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<Button Command="{Binding GoBack}" Image="Back.png" Grid.Column="0" BackgroundColor="#15000000" />
+				<Button Image="Copy.png" Grid.Column="1" BackgroundColor="#15000000"></Button>
+				<Button Image="Cut.png" Grid.Column="2" BackgroundColor="#15000000" />
+				<Button Image="Paste.png" Grid.Column="3" BackgroundColor="#15000000" />
+				<Button Command="{Binding RemoveSelected}" Image="Remove.png" Grid.Column="4" BackgroundColor="#15000000" />
+
+			</Grid>
+
+
+
+
+
+
+
+		</Grid>
+	</ContentPage.Content>
+</ContentPage>

@@ -47,6 +47,7 @@
     <Compile Include="Categories\AudioCategory.cs" />
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\ControlCategory.cs" />
+    <Compile Include="Categories\FileManagerCategory.cs" />
     <Compile Include="Categories\ProcessCategory.cs" />
     <Compile Include="Categories\TerminalCategory.cs" />
     <Compile Include="Converters\DateTimeFormatJsonConverter.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="MidgeRestClient.cs" />
     <Compile Include="Models\AudioChannel.cs" />
     <Compile Include="Models\AudioStreamInfo.cs" />
+    <Compile Include="Models\DirectoryModel.cs" />
+    <Compile Include="Models\LogicalDriveModel.cs" />
     <Compile Include="Models\MouseButton.cs" />
     <Compile Include="Models\ProcessModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
