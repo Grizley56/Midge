@@ -5,7 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Midge.Server;
 using Midge.Server.Windows;
+using Midge.Server.Windows.Utils;
 
 namespace Midge.Client.Mobile.Server.Windows
 {
@@ -14,10 +16,17 @@ namespace Midge.Client.Mobile.Server.Windows
 	/// </summary>
 	public partial class App : Application
 	{
+		public static MidgeServer Server { get; private set; }
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			AudioCapturer.Init();
+			//AudioCapturer.Init();
+
+			Server = new MidgeServer(8733, CertificateHelper.GenerateCertificate("Midge"));
+
 			base.OnStartup(e);
 		}
+
+
 	}
 }

@@ -12,6 +12,7 @@ using Midge.Server.Communication.Core;
 using Midge.Server.Communication.Parsers;
 using Midge.Server.Controllers;
 using Midge.Server.Core;
+using Midge.Server.Database;
 using Midge.Server.Extensions;
 using Midge.Server.Services;
 using Midge.Server.Web.Ssl;
@@ -40,10 +41,14 @@ namespace Midge.Server
 		public IDependencyStorage DependencyStorage { get; set; }
 		public IServiceManager ServiceManager { get; set; }
 
+		public MidgeDbContext Context { get; set; }
+
 		public MidgeServer(int port, X509Certificate certificate)
 		{
 			Ip = new IPEndPoint(IPAddress.Any, port);
 			Certificate = certificate;
+
+			Context = new MidgeDbContext("database.db3");
 
 			InternalTcp = new TcpSslServer(Ip, Certificate);
 			InternalUdp = new UdpServer(port + 1);
