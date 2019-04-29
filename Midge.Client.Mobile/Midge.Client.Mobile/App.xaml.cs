@@ -15,10 +15,10 @@ namespace Midge.Client.Mobile
 			MainPage = new View.MainPage();
 		}
 
-		protected override void OnStart()
+		protected override async void OnStart()
 		{
 			MidgeCore.Instance.ReconnectionTimeout = 5000;
-			MidgeCore.Instance.Start();
+			await MidgeCore.Instance.Start();
 			
 		}
 

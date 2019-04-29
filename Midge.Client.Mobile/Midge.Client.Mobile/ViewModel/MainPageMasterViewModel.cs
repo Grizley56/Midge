@@ -19,10 +19,11 @@ namespace Midge.Client.Mobile.ViewModel
 				new MainPageMenuItem { Id = 0, Title = "Sound", TargetType = typeof(View.SoundPage), Image = "Sound.png" },
 				new MainPageMenuItem { Id = 1, Title = "Processes", TargetType = typeof(ProcessPage), Image = "Processes.png" },
 				new MainPageMenuItem { Id = 2, Title = "Settings", TargetType = typeof(View.SettingsPage), Image= "Settings.png" },
-				new MainPageMenuItem { Id = 3, Title = "Terminal", TargetType = typeof(TerminalPage), Image = "Terminal.png" },
+				new MainPageMenuItem { Id = 3, Title = "System", TargetType = typeof(SystemPage), Image = "Terminal.png" },
 				new MainPageMenuItem { Id = 4, Title = "Mouse", TargetType = typeof(MouseControlPage), Image = "Mouse.png" },
 				new MainPageMenuItem { Id = 5, Title = "Keyboard", TargetType = typeof(KeyboardControlPage), Image = "Keyboard.png" },
-				new MainPageMenuItem { Id = 6, Title = "File Manager", TargetType = typeof(FileManagerPage), Image = "FileManager.png" }
+				new MainPageMenuItem { Id = 6, Title = "File Manager", TargetType = typeof(FileManagerPage), Image = "FileManager.png" },
+				new MainPageMenuItem { Id = 6, Title = "Presentation", TargetType = typeof(PowerPointPage), Image = "PP.png" },
 			});
 		}
 

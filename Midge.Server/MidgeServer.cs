@@ -73,6 +73,8 @@ namespace Midge.Server
 			ServiceManager.AddService(typeof(IVolumeService), DependencyStorage.VolumeService);
 			ServiceManager.AddService(typeof(IControlService), DependencyStorage.ControlService);
 			ServiceManager.AddService(typeof(IAudioStreamService), DependencyStorage.AudioStreamService);
+			ServiceManager.AddService(typeof(ISystemService), DependencyStorage.SystemService);
+			ServiceManager.AddService(typeof(IPresentationService), DependencyStorage.PresentationService);
 		}
 
 		private void InternalServerMessageReceived(object sender, TcpMessageReceivedEventArgs e)
@@ -83,7 +85,7 @@ namespace Midge.Server
 
 			MidgeCommandInvoker commandInvoker = _controllerFactory.Create(clientMessage);
 
-			commandInvoker.InvokeAsync(
+			var task = commandInvoker.InvokeAsync(
 				new MidgeContext(e.TcpClient, UsersManager, AudioBroadcaster), ServiceManager,
 				(controller) =>
 				{
@@ -93,13 +95,14 @@ namespace Midge.Server
 					var response = _serverMessageParser.Parse(controller.Response, clientMessage.Key);
 
 					e.TcpClient.SendMessage(new TcpMessage(response.ToString()));
-					Debug.WriteLine("es! " + response.ToString());
 				}, (controller, exception) =>
 				{
 					var response = _serverMessageParser.ParseError(exception.Message, clientMessage.Key);
 
 					e.TcpClient.SendMessage(new TcpMessage(response.ToString()));
-				});
+				}).ConfigureAwait(false);
+
+			
 		}
 
 		public async Task Start()

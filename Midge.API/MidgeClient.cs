@@ -21,6 +21,8 @@ namespace Midge.API
 		public ProcessCategory Process { get; private set; }
 		public ControlCategory Control { get; private set; }
 		public FileManagerCategory FileManager { get; private set; }
+		public SystemCategory System { get; private set; }
+		public PresentationCategory Presentation { get; private set; }
 
 		public MidgeRestClient RestClient { get; private set; }
 
@@ -47,6 +49,8 @@ namespace Midge.API
 			Process = new ProcessCategory(this);
 			Control = new ControlCategory(this);
 			FileManager = new FileManagerCategory(this);
+			System = new SystemCategory(this);
+			Presentation = new PresentationCategory(this);
 
 			_jsonSerializer = new JsonSerializer();
 			_jsonSerializer.Converters.Add(new UnixDateTimeConverter());

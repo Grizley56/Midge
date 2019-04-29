@@ -8,6 +8,8 @@
 		<ResourceDictionary>
 
 			<local:SoundViewModel x:Key="SoundViewModel" x:Name="SoundViewModel" />
+			<local:SystemViewModel x:Key="SystemViewModel" x:Name="SystemViewModel" />
+			<local:PowerPointViewModel x:Key="PowerPointViewModel" x:Name="PowerPointViewModel" />
 			
 
 			<OnPlatform x:TypeArguments="x:String" x:Key="Black">

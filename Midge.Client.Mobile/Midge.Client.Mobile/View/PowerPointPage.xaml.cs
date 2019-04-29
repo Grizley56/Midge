@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Midge.Client.Mobile.View
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TerminalPage : ContentPage
+	public partial class PowerPointPage : ContentPage
 	{
-		public TerminalPage ()
+		public PowerPointPage()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:midgeControls="clr-namespace:Midge.Client.Mobile.MidgeControls;assembly=Midge.Client.Mobile"
+             x:Class="Midge.Client.Mobile.View.PowerPointPage"
+             BindingContext="{StaticResource PowerPointViewModel}">
+	<ContentPage.Content>
+		<midgeControls:MidgeFrame>
+			<StackLayout Orientation="Vertical" VerticalOptions="Center">
+
+				<Label Text="POWERPOINT CONTROL" HorizontalTextAlignment="Center" 
+				       Style="{StaticResource MidgeLabelHStyle}" />
+
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition />
+						<ColumnDefinition />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<midgeControls:MidgeFrame  VerticalOptions="Center" 
+					                           HorizontalOptions="Center" 
+					                           Grid.Column="0" Elevation="30" 
+					                           CornerRadius="10">
+
+						<ImageButton VerticalOptions="Center" 
+					             HorizontalOptions="Center"
+
+					             Source="Undo.png" Padding="5" 
+					             BackgroundColor="White"
+					             Command="{Binding PreviousSlideCommand}"/>
+					</midgeControls:MidgeFrame>
+
+
+					<midgeControls:MidgeFrame  VerticalOptions="Center" 
+					                           HorizontalOptions="Center" 
+					                           Grid.Column="1" Elevation="30" 
+					                           CornerRadius="10">
+
+						<ImageButton VerticalOptions="Center" 
+						             HorizontalOptions="Center"
+
+						             Source="Play.png" Padding="5" 
+						             BackgroundColor="White"
+												 Command="{Binding StartCommand}"
+						             />
+					</midgeControls:MidgeFrame>
+
+					<midgeControls:MidgeFrame  VerticalOptions="Center" 
+					                           HorizontalOptions="Center" 
+					                           Grid.Column="2" Elevation="30" 
+					                           CornerRadius="10">
+
+						<ImageButton VerticalOptions="Center" 
+						             HorizontalOptions="Center"
+
+						             Source="Next.png" Padding="5" 
+						             BackgroundColor="White"
+						             Command="{Binding NextSlideCommand}"/>
+					</midgeControls:MidgeFrame>
+
+				</Grid>
+			</StackLayout>
+
+		</midgeControls:MidgeFrame>
+
+	</ContentPage.Content>
+</ContentPage>

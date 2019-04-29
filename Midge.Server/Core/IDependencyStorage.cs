@@ -11,5 +11,7 @@ namespace Midge.Server.Core
 		IVolumeService VolumeService { get; }
 		IControlService ControlService { get; }
 		IAudioStreamService AudioStreamService { get; }
+		ISystemService SystemService { get; }
+		IPresentationService PresentationService { get; set; }
 	}
 }

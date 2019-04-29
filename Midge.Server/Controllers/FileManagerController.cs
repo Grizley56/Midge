@@ -52,5 +52,11 @@ namespace Midge.Server.Controllers
 			File.Delete(path);
 		}
 
+		[MidgeCommand("downloadFile")]
+		public void DownloadFile([MidgeParameter("path")] string path)
+		{
+
+		}
+
 	}
 }

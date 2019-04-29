@@ -18,7 +18,7 @@
 	</MasterDetailPage.Resources>
 
 	<MasterDetailPage.ToolbarItems>
-		<ToolbarItem Icon="{Binding  Source={StaticResource ConnectionViewModel}, Path=Connection.State, Mode=OneWay, Converter={StaticResource StateToImageConverter}}">
+		<ToolbarItem Command="{Binding Source={StaticResource ConnectionViewModel}, Path=ReconnectCommand}" Icon="{Binding  Source={StaticResource ConnectionViewModel}, Path=Connection.State, Mode=OneWay, Converter={StaticResource StateToImageConverter}}">
 		</ToolbarItem>
 	</MasterDetailPage.ToolbarItems>
 

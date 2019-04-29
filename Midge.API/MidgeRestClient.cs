@@ -62,6 +62,7 @@ namespace Midge.API
 
 			if (!success)
 			{
+				Tcp.Dispose();
 				throw new Exception("Failed to connect.");
 			}
 
@@ -142,9 +143,6 @@ namespace Midge.API
 
 		public async Task SendMessageAsync(byte[] message)
 		{
-			if (!IsStarted)
-				throw new InvalidOperationException("TcpClient stopped");
-
 			await _semaphore.WaitAsync();
 
 			try
@@ -152,6 +150,12 @@ namespace Midge.API
 				await _sslStream.WriteAsync(BitConverter.GetBytes(message.Length), 0, sizeof(int));
 				await _sslStream.WriteAsync(message, 0, message.Length);
 				await _sslStream.FlushAsync();
+			}
+			catch
+			{
+				IsStarted = false;
+				OnFaulted();
+				return;
 			}
 			finally
 			{
@@ -166,9 +170,6 @@ namespace Midge.API
 
 		public void SendMessage(byte[] message)
 		{
-			if (!IsStarted)
-				throw new InvalidOperationException("TcpClient stopped");
-
 			_semaphore.Wait();
 
 			try
@@ -176,6 +177,12 @@ namespace Midge.API
 				_sslStream.Write(BitConverter.GetBytes(message.Length), 0, sizeof(int));
 				_sslStream.Write(message, 0, message.Length);
 				_sslStream.Flush();
+			}
+			catch
+			{
+				IsStarted = false;
+				OnFaulted();
+				return;
 			}
 			finally
 			{

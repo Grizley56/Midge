@@ -43,6 +43,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.PowerPoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -83,6 +86,8 @@
     <Compile Include="Services\ControlService.cs" />
     <Compile Include="Services\DependencySolver.cs" />
     <Compile Include="Services\DependencySolverPlug.cs" />
+    <Compile Include="Services\PowerPointService.cs" />
+    <Compile Include="Services\SystemService.cs" />
     <Compile Include="Services\ProcessService.cs" />
     <Compile Include="Services\SoundInSourceWrapper.cs" />
     <Compile Include="Services\VolumeService.cs" />
@@ -128,6 +133,9 @@
   <ItemGroup>
     <PackageReference Include="AudioSwitcher.AudioApi.CoreAudio">
       <Version>3.1.0-beta1</Version>
+    </PackageReference>
+    <PackageReference Include="CliWrap">
+      <Version>2.2.1</Version>
     </PackageReference>
     <PackageReference Include="CSCore">
       <Version>1.2.1.2</Version>

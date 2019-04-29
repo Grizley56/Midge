@@ -1,10 +1,62 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Midge.Client.Mobile.View.SystemPage">
-    <ContentPage.Content>
+             xmlns:midgeControls="clr-namespace:Midge.Client.Mobile.MidgeControls;assembly=Midge.Client.Mobile"
+             x:Class="Midge.Client.Mobile.View.SystemPage"
+             BindingContext="{Binding Source={StaticResource SystemViewModel}}">
+	<ContentPage.Content>
 		<StackLayout>
-			<TimePicker />
-        </StackLayout>
+			<midgeControls:MidgeFrame Elevation="30" CornerRadius="10">
+				<StackLayout>
+					<Label Text="SYSTEM CONTROL" HorizontalTextAlignment="Center" Style="{StaticResource MidgeLabelHStyle}" ></Label>
+
+					<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+						<Button Text="Turn off by timer"
+						        Command="{Binding TurnOffByTimerCommand}"
+						        WidthRequest="160"></Button>
+						<Button Command="{Binding TurnOffCommand}" 
+						        Text="TURN OFF RIGHT NOW" WidthRequest="160"></Button>
+					</StackLayout>
+
+					<StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+						<Button Text="RESTART by timer" 
+						        Command="{Binding RestartByTimerCommand}"
+						        WidthRequest="160"></Button>
+						<Button Command="{Binding RestartCommand}" Text="RESTART RIGHT NOW" WidthRequest="160"></Button>
+					</StackLayout>
+				</StackLayout>
+			
+			</midgeControls:MidgeFrame>
+
+			<midgeControls:MidgeFrame Elevation="30" CornerRadius="10">
+				<StackLayout>
+					<Label Text="TERMINAL" HorizontalTextAlignment="Center" Style="{StaticResource MidgeLabelHStyle}" ></Label>
+					<StackLayout BackgroundColor="Black" Padding="1">
+						<StackLayout BackgroundColor="White" Padding="0">
+							<ScrollView>
+								<Label WidthRequest="300" HeightRequest="300">
+								</Label>
+							</ScrollView>
+						</StackLayout>
+					</StackLayout>
+
+
+
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*"></ColumnDefinition>
+							<ColumnDefinition Width="75"></ColumnDefinition>
+
+
+						</Grid.ColumnDefinitions>
+						<midgeControls:MidgeEntry UnderlineColor="#3F51B5" x:Name="IpEntry" Grid.Row="0" Grid.Column="0" Keyboard="Text"  />
+						<Button Grid.Column="1" Text="Send" HeightRequest="40" HorizontalOptions="Center" VerticalOptions="End"></Button>
+					</Grid>
+					
+				</StackLayout>
+
+			</midgeControls:MidgeFrame>
+
+		</StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -51,7 +51,7 @@ namespace Midge.Client.Mobile.Core
 			if (State == ConnectionState.Connected)
 				return;
 
-
+			await TryConnect();
 		}
 
 		private async Task TryConnect()
@@ -71,7 +71,7 @@ namespace Midge.Client.Mobile.Core
 			}
 		}
 
-		public async void Start()
+		public async Task Start()
 		{
 			await TryConnect();
 
@@ -81,6 +81,12 @@ namespace Midge.Client.Mobile.Core
 		public void Stop()
 		{
 			_connectTimer.Stop();
+		}
+
+		public Task Restart()
+		{
+			Stop();
+			return Start();
 		}
 
 		private ConnectionState _state = ConnectionState.Disconnected;

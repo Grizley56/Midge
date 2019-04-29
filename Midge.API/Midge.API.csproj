@@ -48,7 +48,9 @@
     <Compile Include="Categories\Category.cs" />
     <Compile Include="Categories\ControlCategory.cs" />
     <Compile Include="Categories\FileManagerCategory.cs" />
+    <Compile Include="Categories\PresentationCategory.cs" />
     <Compile Include="Categories\ProcessCategory.cs" />
+    <Compile Include="Categories\SystemCategory.cs" />
     <Compile Include="Categories\TerminalCategory.cs" />
     <Compile Include="Converters\DateTimeFormatJsonConverter.cs" />
     <Compile Include="Core\IWaitable.cs" />

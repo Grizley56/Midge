@@ -14,6 +14,8 @@ namespace Midge.Server.Windows.Services
 		public IVolumeService VolumeService { get; }
 		public IControlService ControlService { get; }
 		public IAudioStreamService AudioStreamService { get; }
+		public ISystemService SystemService { get; }
+		public IPresentationService PresentationService { get; set; }
 
 		public DependencySolverPlug()
 		{
@@ -21,6 +23,8 @@ namespace Midge.Server.Windows.Services
 			VolumeService = new VolumeServicePlug();
 			ControlService = new ControlService();
 			AudioStreamService = new AudioStreamService();
+			SystemService = new SystemService();
+			PresentationService = new PowerPointService();
 		}
 	}
 
